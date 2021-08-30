@@ -42,7 +42,6 @@ app.post("/", (req: Request, res: Response) => {
       }
     );
   });
-  // res.status(200).json({ message: `todo ${todo} added successfully` });
   res.status(200).json(todo);
 });
 
