@@ -62,3 +62,20 @@ app.delete("/:todo_id", (req: Request, res: Response) => {
   });
   res.status(200).json({ message: `todo deleted successfully` });
 });
+
+//delete all tasks
+app.delete("/", (req: Request, res: Response) => {
+ 
+  jsonReader("./src/utils/data.json", (err: any, data: any) => {
+    if (err) return res.status(500).json({ message: err });
+    data.splice(0, data.length);
+    fs.writeFile(
+      "./src/utils/data.json",
+      JSON.stringify([], null, 2),
+      (err) => {
+        if (err) return res.status(500).json({ message: err });
+      }
+    );
+  });
+  res.status(200).json({ message: `all tasks are deleted succesfully` });
+});
